@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game-in-my-style</title>
+    <meta name="description" content="A coding game with challenges in multiple programming languages" />
+    <meta name="author" content="Lovable" />
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Lucide icons via CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <div class="container">
+                <h1 class="logo">Game<span class="logo-light">-in-my-</span><span class="logo-accent">style</span></h1>
+            </div>
+        </header>
+
+        <main class="container">
+            <!-- Initial view: Language Selector -->
+            <div id="language-selector" class="game-screen active">
+                <div class="screen-content">
+                    <span class="badge">Step 1</span>
+                    <h1>Choose a language</h1>
+                    <p class="subtext">Select the programming language you want to use for your coding challenge.</p>
+
+                    <div class="language-cards">
+                        <div class="card" data-language="java">
+                            <span class="icon">☕</span>
+                            <h3>Java</h3>
+                            <p>A versatile, object-oriented language</p>
+                            <div class="check-icon"><i data-lucide="check"></i></div>
+                        </div>
+                        <div class="card" data-language="python">
+                            <span class="icon">🐍</span>
+                            <h3>Python</h3>
+                            <p>Simple, readable, and powerful</p>
+                            <div class="check-icon"><i data-lucide="check"></i></div>
+                        </div>
+                        <div class="card" data-language="c++">
+                            <span class="icon">⚡</span>
+                            <h3>C++</h3>
+                            <p>Fast, efficient, and powerful</p>
+                            <div class="check-icon"><i data-lucide="check"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Difficulty Selector -->
+            <div id="difficulty-selector" class="game-screen">
+                <div class="screen-content">
+                    <button class="back-button"><i data-lucide="arrow-left"></i> Back to language selection</button>
+
+                    <span class="badge">Step 2</span>
+                    <h1>Select difficulty</h1>
+                    <p class="subtext">Choose how challenging you want your coding exercise to be.</p>
+
+                    <div class="difficulty-cards">
+                        <div class="card" data-difficulty="beginner">
+                            <div class="content">
+                                <h3>Beginner</h3>
+                                <p>Perfect for those just starting out</p>
+                            </div>
+                            <div class="level-indicator">
+                                <div class="level-dot active"></div>
+                                <div class="level-dot"></div>
+                                <div class="level-dot"></div>
+                            </div>
+                        </div>
+                        <div class="card" data-difficulty="medium">
+                            <div class="content">
+                                <h3>Medium</h3>
+                                <p>Some coding experience required</p>
+                            </div>
+                            <div class="level-indicator">
+                                <div class="level-dot active"></div>
+                                <div class="level-dot active"></div>
+                                <div class="level-dot"></div>
+                            </div>
+                        </div>
+                        <div class="card" data-difficulty="advanced">
+                            <div class="content">
+                                <h3>Advanced</h3>
+                                <p>For experienced programmers</p>
+                            </div>
+                            <div class="level-indicator">
+                                <div class="level-dot active"></div>
+                                <div class="level-dot active"></div>
+                                <div class="level-dot active"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Rules -->
+            <div id="game-rules" class="game-screen">
+                <div class="screen-content">
+                    <button class="back-button"><i data-lucide="arrow-left"></i> Back to difficulty selection</button>
+
+                    <span class="badge">Before you start</span>
+                    <h1>Game Rules</h1>
+                    <p class="subtext">Understand how the game works before diving into the challenge.</p>
+
+                    <div class="challenge-card">
+                        <h2>Your Challenge</h2>
+                        <h3 id="challenge-title"></h3>
+                        <p id="challenge-description"></p>
+                    </div>
+
+                    <div class="rules-list">
+                        <div class="rule-card">
+                            <div class="rule-icon"><i data-lucide="clock"></i></div>
+                            <div class="rule-content">
+                                <h3>5-Minute Time Limit</h3>
+                                <p>Complete the challenge before the timer runs out.</p>
+                            </div>
+                        </div>
+                        <div class="rule-card">
+                            <div class="rule-icon"><i data-lucide="play"></i></div>
+                            <div class="rule-content">
+                                <h3>Preview Available</h3>
+                                <p>Use the Preview button to see the expected output.</p>
+                            </div>
+                        </div>
+                        <div class="rule-card">
+                            <div class="rule-icon"><i data-lucide="code"></i></div>
+                            <div class="rule-content">
+                                <h3>Accurate Code</h3>
+                                <p>Your code must produce the exact same output as expected.</p>
+                            </div>
+                        </div>
+                        <div class="rule-card">
+                            <div class="rule-icon"><i data-lucide="check-square"></i></div>
+                            <div class="rule-content">
+                                <h3>Compile First</h3>
+                                <p>You must successfully compile your code before submitting.</p>
+                            </div>
+                        </div>
+                        <div class="rule-card">
+                            <div class="rule-icon"><i data-lucide="x"></i></div>
+                            <div class="rule-content">
+                                <h3>No Errors Allowed</h3>
+                                <p>Submitting with compilation errors will fail the level.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="start-challenge" class="primary-button">
+            Start Challenge <i data-lucide="arrow-right"></i>
+          </button>
+                </div>
+            </div>
+
+            <!-- Code Editor -->
+            <div id="code-editor-screen" class="game-screen">
+                <div class="screen-content">
+                    <div class="editor-header">
+                        <div>
+                            <h2 id="editor-challenge-title"></h2>
+                            <p id="editor-challenge-description" class="subtext"></p>
+                        </div>
+                        <div class="timer">
+                            <i data-lucide="clock"></i>
+                            <span id="time-display">05:00</span>
+                        </div>
+                    </div>
+
+                    <div class="editor-container">
+                        <div class="editor-column">
+                            <div class="column-header">
+                                <h3><i data-lucide="code"></i> Code Editor</h3>
+                                <div id="language-indicator" class="language-tag"></div>
+                            </div>
+                            <div class="editor-wrapper">
+                                <textarea id="code-area" spellcheck="false"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="output-column">
+                            <div class="column-header">
+                                <h3>Output</h3>
+                                <button id="preview-toggle" class="small-button">
+                  <i data-lucide="play"></i> Show Preview
+                </button>
+                            </div>
+                            <div class="output-wrapper">
+                                <div id="preview-area" class="hidden">
+                                    <div class="output-label">Expected Output:</div>
+                                    <pre id="expected-output"></pre>
+                                </div>
+                                <div id="output-area">
+                                    <div id="compile-idle" class="compile-state active">
+                                        Click "Compile" to see the output of your code
+                                    </div>
+                                    <div id="compile-loading" class="compile-state">
+                                        Compiling...
+                                    </div>
+                                    <div id="compile-error" class="compile-state">
+                                        <div class="output-label error">Error:</div>
+                                        <pre id="error-output"></pre>
+                                    </div>
+                                    <div id="compile-success" class="compile-state">
+                                        <div class="output-label success">Output:</div>
+                                        <pre id="code-output"></pre>
+                                        <div class="match-result">
+                                            <div class="output-label">Matches expected:</div>
+                                            <div id="match-indicator"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-actions">
+                        <button id="compile-button" class="secondary-button">Compile</button>
+                        <button id="submit-button" class="primary-button" disabled>Submit</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Result Display - Success -->
+            <div id="result-success" class="game-screen">
+                <div class="screen-content result-content">
+                    <div class="result-icon success">
+                        <i data-lucide="check"></i>
+                    </div>
+                    <h1>Challenge Completed!</h1>
+                    <p class="subtext">Congratulations! You've successfully completed this coding challenge.</p>
+                    <div class="result-actions">
+                        <button id="restart-button" class="secondary-button">
+              <i data-lucide="rotate-ccw"></i> Start Over
+            </button>
+                        <button id="next-level-button" class="primary-button">
+              Next Level <i data-lucide="arrow-right"></i>
+            </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Result Display - Failure -->
+            <div id="result-failure" class="game-screen">
+                <div class="screen-content result-content">
+                    <div class="result-icon failure">
+                        <i data-lucide="x"></i>
+                    </div>
+                    <h1>Better Luck Next Time</h1>
+                    <p class="subtext">Don't worry, practice makes perfect. Try again to improve your skills.</p>
+                    <div class="result-actions">
+                        <button id="restart-button-failure" class="secondary-button">
+              <i data-lucide="rotate-ccw"></i> Start Over
+            </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
